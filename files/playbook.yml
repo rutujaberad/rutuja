@@ -1,0 +1,14 @@
+---
+  - name: simple Playbook
+    hosts: data
+    become: yes
+    become_user: root
+    tasks:
+      - name: Ensure Apache Server
+        yum:
+          name: httpd
+          state: latest
+      - name: ensure apache is runing
+        service:
+          name: httpd
+          state: started

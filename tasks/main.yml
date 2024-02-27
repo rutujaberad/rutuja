@@ -1,0 +1,29 @@
+---
+  - name: task1
+    hosts: data
+    become: yes
+    become_user: root
+    tasks:
+      - name: Install Package
+        yum:
+          name:
+            - firewalld
+            - httpd
+            - php
+            - php-mysqlnd.x86_64
+          state: installed
+      - name: Enable Firewall
+        service:
+          name: firewalld
+          enabled: true
+          state: started
+      - name: Enable http
+        service:
+          name: httpd
+          enabled: true
+          state: started
+      - name: copy modules
+        copy:
+          src: hello.sh
+          dest: /root
+     
